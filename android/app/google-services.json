@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "610596902875",
+    "project_id": "mero-anime",
+    "storage_bucket": "mero-anime.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610596902875:android:1030fbb6b8ee8629c379fe",
+        "android_client_info": {
+          "package_name": "com.example.mero_anime"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGX0PsnvH_4eQTq1OEzY4jzmhieqfOKNA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
