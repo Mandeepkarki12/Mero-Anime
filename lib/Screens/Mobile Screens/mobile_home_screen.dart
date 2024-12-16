@@ -21,6 +21,8 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
           ),
           backgroundColor: Theme.of(context).colorScheme.primary,
         ),
-        body: Column());
+        body: Column(
+         
+        ));
   }
 }
