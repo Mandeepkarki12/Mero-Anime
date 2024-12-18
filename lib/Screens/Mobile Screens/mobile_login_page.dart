@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mero_anime/Screens/Mobile%20Screens/mobile_register_page.dart';
 import 'package:mero_anime/Widgets/my_button.dart';
 import 'package:mero_anime/Widgets/my_text_field.dart';
 
@@ -129,7 +130,9 @@ class MobileLoginPage extends StatelessWidget {
                   children: [
                     const Text('Not a Member ? '),
                     GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>MobileRegisterPage()));
+                        },
                         child: const Text(
                           ' Register here',
                           style: TextStyle(color: Colors.blue),

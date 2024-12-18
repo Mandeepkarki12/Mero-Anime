@@ -118,7 +118,9 @@ class MobileRegisterPage extends StatelessWidget {
                   children: [
                     const Text('Already a Member ? '),
                     GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
                         child: const Text(
                           'Login',
                           style: TextStyle(color: Colors.blue),
