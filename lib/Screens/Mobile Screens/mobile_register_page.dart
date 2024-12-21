@@ -1,12 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:mero_anime/Authentication/firebase_authentication.dart';
 import 'package:mero_anime/Widgets/my_button.dart';
 import 'package:mero_anime/Widgets/my_text_field.dart';
 
 class MobileRegisterPage extends StatelessWidget {
+  final TextEditingController _userNameTextEditingController =
+      TextEditingController();
   final TextEditingController _emailTextEditingController =
       TextEditingController();
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
+  Future<bool> register() async {
+    FirebaseAuthentication _auth = FirebaseAuthentication();
+    bool checkRegister = await _auth.accountRegister(
+        _emailTextEditingController.text, _passwordTextEditingController.text);
+    if (checkRegister) {
+      print(_auth.registerExceptionMessage);
+      _emailTextEditingController.clear();
+      _passwordTextEditingController.clear();
+      _userNameTextEditingController.clear();
+      return true;
+    } else {
+      print(_auth.registerExceptionMessage);
+      return false ;
+    }
+
+  }
+
   MobileRegisterPage({super.key});
   @override
   Widget build(BuildContext context) {
@@ -38,7 +58,7 @@ class MobileRegisterPage extends StatelessWidget {
                 MyTextfield(
                   hintText: 'Username',
                   obscureText: false,
-                  controller: _emailTextEditingController,
+                  controller: _userNameTextEditingController,
                 ),
                 SizedBox(
                   height: height * 0.01,
@@ -62,7 +82,14 @@ class MobileRegisterPage extends StatelessWidget {
                   height: height * 0.03,
                 ),
                 // login button
-                MyButton(text: 'Register', onTap: () {}),
+                MyButton(
+                    text: 'Register',
+                    onTap: () async {
+                     Future<bool> changePage= register();
+                     if(await changePage){
+                       Navigator.pop(context);
+                     }
+                    }),
                 SizedBox(
                   height: height * 0.04,
                 ),

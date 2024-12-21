@@ -1,14 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:mero_anime/Screens/Mobile%20Screens/mobile_forgot_password_page.dart';
-import 'package:mero_anime/Screens/Mobile%20Screens/mobile_home_screen.dart';
-import 'package:mero_anime/Screens/Mobile%20Screens/mobile_login_page.dart';
-import 'package:mero_anime/Screens/Mobile%20Screens/mobile_register_page.dart';
-import 'package:mero_anime/Screens/Web%20Screens/web_forgot_password_page.dart';
-import 'package:mero_anime/Screens/Web%20Screens/web_home_page.dart';
-import 'package:mero_anime/Screens/Web%20Screens/web_login_screen.dart';
-import 'package:mero_anime/Screens/Web%20Screens/web_register_screen.dart';
-import 'package:mero_anime/Screens/switch_screen.dart';
+import 'package:mero_anime/Authentication/firebase_auth_state_change.dart';
 import 'package:mero_anime/Themes/default_theme.dart';
 import 'firebase_options.dart';
 
@@ -25,11 +17,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: lightMode,
-        darkTheme: darkMode,
-        home:  SwitchScreen(
-            mobileBody: MobileLoginPage(), desktopBody: WebLoginScreen()  ));
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: lightMode,
+      darkTheme: darkMode,
+      home: const FirebaseAuthStateChange(),
+    );
   }
 }
+

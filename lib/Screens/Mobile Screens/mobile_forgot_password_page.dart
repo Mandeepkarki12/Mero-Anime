@@ -28,7 +28,7 @@ class _MobileForgotPasswordPageState extends State<MobileForgotPasswordPage> {
               SizedBox(height: height*0.02,),
               // Forgot password text
               Padding(
-                padding: const EdgeInsets.only(right: 250),
+                padding: const EdgeInsets.only(right: 100),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

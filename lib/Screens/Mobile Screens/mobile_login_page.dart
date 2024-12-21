@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mero_anime/Authentication/firebase_authentication.dart';
+import 'package:mero_anime/Screens/Mobile%20Screens/mobile_forgot_password_page.dart';
 import 'package:mero_anime/Screens/Mobile%20Screens/mobile_register_page.dart';
 import 'package:mero_anime/Widgets/my_button.dart';
 import 'package:mero_anime/Widgets/my_text_field.dart';
@@ -8,6 +10,17 @@ class MobileLoginPage extends StatelessWidget {
       TextEditingController();
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
+  void login() async {
+    FirebaseAuthentication _auth = FirebaseAuthentication();
+    bool checkLogin = await _auth.accountLogin(
+        _emailTextEditingController.text, _passwordTextEditingController.text);
+    if (checkLogin) {
+      print(_auth.loginExceptionMessage);
+    } else {
+      print(_auth.loginExceptionMessage);
+    }
+  }
+
   MobileLoginPage({super.key});
   @override
   Widget build(BuildContext context) {
@@ -21,7 +34,7 @@ class MobileLoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // picture or icon of login
-              Image.asset(
+                Image.asset(
                   'lib/Assets/Images/chopperImage.png',
                   height: 200,
                 ),
@@ -39,7 +52,6 @@ class MobileLoginPage extends StatelessWidget {
                   hintText: 'Email',
                   obscureText: false,
                   controller: _emailTextEditingController,
-               
                 ),
                 SizedBox(
                   height: height * 0.01,
@@ -49,7 +61,6 @@ class MobileLoginPage extends StatelessWidget {
                   hintText: 'Password',
                   obscureText: true,
                   controller: _passwordTextEditingController,
-             
                 ),
                 // forgot password
 
@@ -57,9 +68,14 @@ class MobileLoginPage extends StatelessWidget {
                   height: height * 0.03,
                 ),
                 GestureDetector(
-                  onTap: () {},
-                  child: const  Padding(
-                    padding: EdgeInsets.only(left: 250 ),
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => MobileForgotPasswordPage()));
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 250),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -74,7 +90,9 @@ class MobileLoginPage extends StatelessWidget {
                   height: height * 0.03,
                 ),
                 // login button
-                MyButton(text: 'Login', onTap: () {}),
+                MyButton(text: 'Login', onTap: () {
+                  login();
+                }),
                 SizedBox(
                   height: height * 0.05,
                 ),
@@ -131,7 +149,10 @@ class MobileLoginPage extends StatelessWidget {
                     const Text('Not a Member ? '),
                     GestureDetector(
                         onTap: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>MobileRegisterPage()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MobileRegisterPage()));
                         },
                         child: const Text(
                           ' Register here',

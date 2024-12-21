@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:mero_anime/Screens/Web%20Screens/web_forgot_password_page.dart';
 import 'package:mero_anime/Screens/Web%20Screens/web_register_screen.dart';
 import 'package:mero_anime/Widgets/my_button.dart';
 import 'package:mero_anime/Widgets/my_text_field.dart';
 
 class WebLoginScreen extends StatelessWidget {
   WebLoginScreen({super.key});
+  
 
   final TextEditingController _emailTextEditingController =
       TextEditingController();
@@ -62,6 +64,7 @@ class WebLoginScreen extends StatelessWidget {
                       GestureDetector(
                         onTap: () {
                           // Action for forgot password
+                           Navigator.push(context, MaterialPageRoute(builder: (context)=>WebForgotPasswordPage()));
                         },
                         child: const Text(
                           'Forgot Password?',
