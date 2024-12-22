@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mero_anime/Authentication/firebase_authentication.dart';
 import 'package:mero_anime/Screens/Web%20Screens/web_forgot_password_page.dart';
 import 'package:mero_anime/Screens/Web%20Screens/web_register_screen.dart';
 import 'package:mero_anime/Widgets/my_button.dart';
@@ -12,6 +13,16 @@ class WebLoginScreen extends StatelessWidget {
       TextEditingController();
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
+        void login() async {
+    FirebaseAuthentication _auth = FirebaseAuthentication();
+    bool checkLogin = await _auth.accountLogin(
+        _emailTextEditingController.text, _passwordTextEditingController.text);
+    if (checkLogin) {
+      print(_auth.loginExceptionMessage);
+    } else {
+      print(_auth.loginExceptionMessage);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +88,9 @@ class WebLoginScreen extends StatelessWidget {
                   height: height * 0.03,
                 ),
                 // Login button
-                MyButton(text: 'Login', onTap: () {}),
+                MyButton(text: 'Login', onTap: () {
+                  login();
+                }),
                 SizedBox(
                   height: height * 0.03,
                 ),

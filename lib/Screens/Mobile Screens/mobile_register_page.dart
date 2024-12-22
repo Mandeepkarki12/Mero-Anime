@@ -22,9 +22,8 @@ class MobileRegisterPage extends StatelessWidget {
       return true;
     } else {
       print(_auth.registerExceptionMessage);
-      return false ;
+      return false;
     }
-
   }
 
   MobileRegisterPage({super.key});
@@ -85,10 +84,10 @@ class MobileRegisterPage extends StatelessWidget {
                 MyButton(
                     text: 'Register',
                     onTap: () async {
-                     Future<bool> changePage= register();
-                     if(await changePage){
-                       Navigator.pop(context);
-                     }
+                      Future<bool> changePage = register();
+                      if (await changePage) {
+                        Navigator.pop(context);
+                      }
                     }),
                 SizedBox(
                   height: height * 0.04,
