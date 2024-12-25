@@ -1,19 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:mero_anime/Authentication/firebase_authentication.dart';
+import 'package:mero_anime/Providers/loading_provider.dart';
 import 'package:mero_anime/Screens/Mobile%20Screens/mobile_forgot_password_page.dart';
 import 'package:mero_anime/Screens/Mobile%20Screens/mobile_register_page.dart';
 import 'package:mero_anime/Widgets/my_button.dart';
 import 'package:mero_anime/Widgets/my_text_field.dart';
+import 'package:provider/provider.dart';
 
-class MobileLoginPage extends StatelessWidget {
+class MobileLoginPage extends StatefulWidget {
+  const MobileLoginPage({super.key});
+
+  @override
+  _MobileLoginPageState createState() => _MobileLoginPageState();
+}
+
+class _MobileLoginPageState extends State<MobileLoginPage> {
   final TextEditingController _emailTextEditingController =
       TextEditingController();
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
-  void login() async {
+
+  @override
+  void dispose() {
+    _emailTextEditingController.dispose();
+    _passwordTextEditingController.dispose();
+    super.dispose();
+  }
+
+  void login(BuildContext context) async {
+    final loadingProvider =
+        Provider.of<LoadingProvider>(context, listen: false);
+    loadingProvider.setLoading(true);
     FirebaseAuthentication _auth = FirebaseAuthentication();
     bool checkLogin = await _auth.accountLogin(
         _emailTextEditingController.text, _passwordTextEditingController.text);
+    loadingProvider.setLoading(false);
+
     if (checkLogin) {
       print(_auth.loginExceptionMessage);
     } else {
@@ -21,11 +43,12 @@ class MobileLoginPage extends StatelessWidget {
     }
   }
 
-  MobileLoginPage({super.key});
   @override
   Widget build(BuildContext context) {
+    final loadingProvider = Provider.of<LoadingProvider>(context, listen: false);
     final height = MediaQuery.of(context).size.height * 1;
     final width = MediaQuery.of(context).size.width * 1;
+
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -90,9 +113,15 @@ class MobileLoginPage extends StatelessWidget {
                   height: height * 0.03,
                 ),
                 // login button
-                MyButton(text: 'Login', onTap: () {
-                  login();
+                Consumer<LoadingProvider>(builder: (context, value, child) {
+                  return MyButton(
+                      text: 'Login',
+                      isLoading: value.isLoading,
+                      onTap: () {
+                        login(context);
+                      });
                 }),
+
                 SizedBox(
                   height: height * 0.05,
                 ),

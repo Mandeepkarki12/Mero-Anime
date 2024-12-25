@@ -7,8 +7,6 @@ import 'package:mero_anime/Widgets/my_text_field.dart';
 
 class WebLoginScreen extends StatelessWidget {
   WebLoginScreen({super.key});
-  
-
   final TextEditingController _emailTextEditingController =
       TextEditingController();
   final TextEditingController _passwordTextEditingController =

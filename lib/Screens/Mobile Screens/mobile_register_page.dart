@@ -1,19 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:mero_anime/Authentication/firebase_authentication.dart';
+import 'package:mero_anime/Providers/loading_provider.dart';
 import 'package:mero_anime/Widgets/my_button.dart';
 import 'package:mero_anime/Widgets/my_text_field.dart';
+import 'package:provider/provider.dart';
 
-class MobileRegisterPage extends StatelessWidget {
+class MobileRegisterPage extends StatefulWidget {
+  const MobileRegisterPage({super.key});
+
+  @override
+  State<MobileRegisterPage> createState() => _MobileRegisterPageState();
+}
+
+class _MobileRegisterPageState extends State<MobileRegisterPage> {
   final TextEditingController _userNameTextEditingController =
       TextEditingController();
+
   final TextEditingController _emailTextEditingController =
       TextEditingController();
+
   final TextEditingController _passwordTextEditingController =
       TextEditingController();
-  Future<bool> register() async {
+
+  Future<bool> register(BuildContext context) async {
+    final loadingProvider =
+        Provider.of<LoadingProvider>(context, listen: false);
+    loadingProvider.setLoading(true);
     FirebaseAuthentication _auth = FirebaseAuthentication();
     bool checkRegister = await _auth.accountRegister(
         _emailTextEditingController.text, _passwordTextEditingController.text);
+    loadingProvider.setLoading(false);
     if (checkRegister) {
       print(_auth.registerExceptionMessage);
       _emailTextEditingController.clear();
@@ -26,7 +42,6 @@ class MobileRegisterPage extends StatelessWidget {
     }
   }
 
-  MobileRegisterPage({super.key});
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height * 1;
@@ -81,14 +96,17 @@ class MobileRegisterPage extends StatelessWidget {
                   height: height * 0.03,
                 ),
                 // login button
-                MyButton(
+               Consumer<LoadingProvider>(builder: (context, value, child){
+                return   MyButton(
                     text: 'Register',
+                    isLoading:value.isLoading,
                     onTap: () async {
-                      Future<bool> changePage = register();
+                      Future<bool> changePage = register(context);
                       if (await changePage) {
                         Navigator.pop(context);
                       }
-                    }),
+                    });
+               }),
                 SizedBox(
                   height: height * 0.04,
                 ),

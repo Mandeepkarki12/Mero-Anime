@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_anime/Authentication/firebase_auth_state_change.dart';
+import 'package:mero_anime/Providers/loading_provider.dart';
 import 'package:mero_anime/Themes/default_theme.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -21,8 +23,16 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: lightMode,
       darkTheme: darkMode,
+      themeMode: ThemeMode.system,
+      builder: (context, child) {
+        return MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => LoadingProvider()),
+          ],
+          child: child,
+        );
+      },
       home: const FirebaseAuthStateChange(),
     );
   }
 }
-
