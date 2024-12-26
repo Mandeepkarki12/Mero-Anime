@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:mero_anime/Authentication/firebase_auth_state_change.dart';
+import 'package:mero_anime/Providers/error_message_provider.dart';
 import 'package:mero_anime/Providers/loading_provider.dart';
 import 'package:mero_anime/Themes/default_theme.dart';
 import 'package:provider/provider.dart';
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         return MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => LoadingProvider()),
+            ChangeNotifierProvider(create: (_) => ErrorMessageProvider())
           ],
           child: child,
         );
