@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mero_anime/Authentication/firebase_authentication.dart';
 import 'package:mero_anime/Widgets/my_button.dart';
 import 'package:mero_anime/Widgets/my_text_field.dart';
 
@@ -13,6 +14,7 @@ class MobileForgotPasswordPage extends StatefulWidget {
 class _MobileForgotPasswordPageState extends State<MobileForgotPasswordPage> {
   final TextEditingController _emailTextEditingController =
       TextEditingController();
+  final FirebaseAuthentication auth  = FirebaseAuthentication();
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height * 1;
@@ -60,7 +62,16 @@ class _MobileForgotPasswordPageState extends State<MobileForgotPasswordPage> {
                   controller: _emailTextEditingController),
                SizedBox(height: height*0.04,),
               // send Link Button
-              MyButton(text: 'Send link ', onTap: () {})
+              MyButton(text: 'Send link ', onTap: () async{
+                Future<bool> isSent = auth.forgotPassword(_emailTextEditingController.text);
+                if (await isSent) {
+                  print(auth.resetPasswordExceptionMessage);
+                }
+                else{
+                  print(auth.resetPasswordExceptionMessage);
+                }
+
+              })
             ],
           ),
         ),

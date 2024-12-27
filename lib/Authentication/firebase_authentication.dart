@@ -5,6 +5,7 @@ class FirebaseAuthentication {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   String registerExceptionMessage = '';
   String loginExceptionMessage = '';
+  String resetPasswordExceptionMessage='';
   Future<bool> accountRegister(String email, String password) async {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
@@ -63,4 +64,37 @@ class FirebaseAuthentication {
   Future<void> accountLogout() async {
     await _firebaseAuth.signOut();
   }
+
+  Future<bool> forgotPassword(String email) async {
+  try {
+    await _firebaseAuth.sendPasswordResetEmail(email: email);
+    print('Password reset email sent successfully to $email.');
+    resetPasswordExceptionMessage = 'Password reset email sent successfully to $email.';
+    return true ;
+  } catch (e) {
+    if (e is FirebaseAuthException) {
+      switch (e.code) {
+        case 'invalid-email':
+          print('The email address is not valid.');
+          resetPasswordExceptionMessage='The email address is not valid.';
+          return false ;
+          break;
+        case 'user-not-found':
+          print('No user found with this email address.');
+          resetPasswordExceptionMessage ='No user found with this email address.';
+           return false ;
+          break;
+        default:
+          print('An error occurred: ${e.message}');
+          resetPasswordExceptionMessage ='An error occurred: ${e.message}';
+           return false ;
+      }
+    } else {
+      print('An unexpected error occurred.');
+      resetPasswordExceptionMessage ='An error occurred';
+       return false ;
+    }
+  }
+}
+
 }
