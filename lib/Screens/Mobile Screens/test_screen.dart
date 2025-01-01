@@ -6,6 +6,5 @@ class TestScreen1 extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(title:const  Text('Test Screen'),),
     );
-
   }
 }

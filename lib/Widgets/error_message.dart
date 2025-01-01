@@ -5,11 +5,13 @@ import 'package:mero_anime/Providers/error_message_provider.dart';
 class ErrorMessage extends StatelessWidget {
   final Color textColor;
   final Color backgroundColor;
+  final double fixedWidth;
 
   const ErrorMessage({
     super.key,
     this.textColor = Colors.white,
     this.backgroundColor = Colors.redAccent,
+    this.fixedWidth = 500, // Set a default fixed width
   });
 
   @override
@@ -23,13 +25,18 @@ class ErrorMessage extends StatelessWidget {
             color: backgroundColor,
             elevation: 5,
             borderRadius: BorderRadius.circular(10),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-              child: Text(
-                errorMessageProvider.errorMessage,
-                style: TextStyle(
-                    color: textColor, fontSize: 16, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
+            child: SizedBox(
+              width: fixedWidth, // Apply fixed width here
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+                child: Text(
+                  errorMessageProvider.errorMessage,
+                  style: TextStyle(
+                      color: textColor,
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
           ),
@@ -40,6 +47,7 @@ class ErrorMessage extends StatelessWidget {
 }
 
 void showErrorMessage(BuildContext context, String message) {
-  final errorMessageProvider = Provider.of<ErrorMessageProvider>(context, listen: false);
+  final errorMessageProvider =
+      Provider.of<ErrorMessageProvider>(context, listen: false);
   errorMessageProvider.setErrorMessage(message);
 }
