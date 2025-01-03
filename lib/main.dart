@@ -7,7 +7,7 @@ import 'package:mero_anime/Themes/default_theme.dart';
 import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
-Future<void> main() async {
+Future<void> main()  async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
