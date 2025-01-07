@@ -6,6 +6,7 @@ import 'package:mero_anime/Models/get_anime_list_api.dart';
 import 'package:mero_anime/Screens/Mobile%20Screens/test_screen.dart';
 import 'package:mero_anime/Screens/Web%20Screens/test_screen2.dart';
 import 'package:mero_anime/Screens/switch_screen.dart';
+import 'package:mero_anime/Widgets/animeBody/body_anime.dart';
 import 'package:mero_anime/Widgets/animeHead/head_anime.dart';
 
 class MobileHomeScreen extends StatefulWidget {
@@ -30,9 +31,9 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
             },
           )
         ],
-        title: const Text(
+        title:  Text(
           'M E R O A N I M E',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
@@ -43,9 +44,20 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
               height: 20,
             ),
             SizedBox(
-              height: 300,
+              height: 290,
               child: HeadAnime(),
-            )
+            ),
+            SizedBox(
+              height: 320,
+              child: BodyAnime(title: 'Popular Anime',rankingType: 'bypopularity', ),
+            ),
+              SizedBox(
+              height: 320,
+              child: BodyAnime(title: 'Top Anime', rankingType: 'all',),
+            ),
+
+
+
           ],
         ),
       ),
