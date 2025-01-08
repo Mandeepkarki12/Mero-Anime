@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mero_anime/Fetching%20Api%20Functions/fetching_anime.dart';
+import 'package:mero_anime/Screens/Mobile%20Screens/mobile_anime_list_page.dart';
 import 'package:mero_anime/Widgets/animeBody/body_anime_template.dart';
 
 class BodyAnime extends StatelessWidget {
@@ -22,15 +23,21 @@ class BodyAnime extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     color: Theme.of(context).colorScheme.tertiary),
               ),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'View all',
-                    style: TextStyle(
-                      color: Colors.purple,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ))
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MobileAnimeListPage()));
+                },
+                child: const Text(
+                  'View all',
+                  style: TextStyle(
+                    color: Colors.purple,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
             ],
           ),
         ),

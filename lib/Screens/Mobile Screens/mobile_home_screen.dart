@@ -49,13 +49,20 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
             ),
             SizedBox(
               height: 320,
-              child: BodyAnime(title: 'Popular Anime',rankingType: 'bypopularity', ),
+              child: BodyAnime(title: 'Popular Animes',rankingType: 'bypopularity', ),
             ),
               SizedBox(
               height: 320,
-              child: BodyAnime(title: 'Top Anime', rankingType: 'all',),
+              child: BodyAnime(title: 'Top Animes', rankingType: 'all',),
             ),
-
+               SizedBox(
+              height: 320,
+              child: BodyAnime(title: 'Upcoming Animes', rankingType: 'upcoming',),
+            ),
+              SizedBox(
+              height: 320,
+              child: BodyAnime(title: 'Airing Animes', rankingType: 'airing',),
+            ),
 
 
           ],
