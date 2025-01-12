@@ -28,7 +28,10 @@ class BodyAnime extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const MobileAnimeListPage()));
+                          builder: (context) => MobileAnimeListPage(
+                                rankingType: rankingType,
+            
+                              )));
                 },
                 child: const Text(
                   'View all',

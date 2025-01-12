@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mero_anime/Authentication/firebase_authentication.dart';
 import 'package:mero_anime/Fetching%20Api%20Functions/fetching_anime.dart';
 import 'package:mero_anime/Models/get_anime_list_api.dart';
+import 'package:mero_anime/Screens/Mobile%20Screens/mobile_search_page.dart';
 import 'package:mero_anime/Screens/Mobile%20Screens/test_screen.dart';
 import 'package:mero_anime/Screens/Web%20Screens/test_screen2.dart';
 import 'package:mero_anime/Screens/switch_screen.dart';
@@ -24,14 +25,21 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       appBar: AppBar(
         actions: [
+           IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+             Navigator.push(context, MaterialPageRoute(builder: (context)=>MobileSearchPage()));
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
               _auth.accountLogout();
             },
-          )
+          ),
+         
         ],
-        title:  Text(
+        title: Text(
           'M E R O A N I M E',
           style: TextStyle(color: Theme.of(context).colorScheme.tertiary),
         ),
@@ -49,22 +57,32 @@ class _MobileHomeScreenState extends State<MobileHomeScreen> {
             ),
             SizedBox(
               height: 320,
-              child: BodyAnime(title: 'Popular Animes',rankingType: 'bypopularity', ),
+              child: BodyAnime(
+                title: 'Popular Animes',
+                rankingType: 'bypopularity',
+              ),
             ),
-              SizedBox(
+            SizedBox(
               height: 320,
-              child: BodyAnime(title: 'Top Animes', rankingType: 'all',),
+              child: BodyAnime(
+                title: 'Top Animes',
+                rankingType: 'all',
+              ),
             ),
-               SizedBox(
+            SizedBox(
               height: 320,
-              child: BodyAnime(title: 'Upcoming Animes', rankingType: 'upcoming',),
+              child: BodyAnime(
+                title: 'Upcoming Animes',
+                rankingType: 'upcoming',
+              ),
             ),
-              SizedBox(
+            SizedBox(
               height: 320,
-              child: BodyAnime(title: 'Airing Animes', rankingType: 'airing',),
+              child: BodyAnime(
+                title: 'Airing Animes',
+                rankingType: 'airing',
+              ),
             ),
-
-
           ],
         ),
       ),
